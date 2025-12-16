@@ -7,6 +7,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeMetricAnimations();
+    // Initialize Auto-Progress Tabs
+    initializeAutoTabs();
 });
 
 /**
@@ -83,22 +85,89 @@ function animateMetric(element) {
 }
 
 /**
- * Optional: Re-trigger animations on scroll if needed
- * This can be uncommented to allow re-animation when scrolling back up
+ * Auto-Progress Tabs Logic
  */
-/*
-function enableReplayOnScroll() {
-    let lastScrollTop = 0;
-    
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop < lastScrollTop && scrollTop === 0) {
-            // Scrolled back to top, reinitialize
-            initializeMetricAnimations();
+function initializeAutoTabs() {
+    const tabs = document.querySelectorAll('.tab-item');
+    const contentItems = document.querySelectorAll('.content-item');
+    const progressBars = document.querySelectorAll('.progress-bar');
+
+    if (!tabs.length) return;
+
+    let currentTab = 0;
+    let startTime = null;
+    let isPaused = false;
+    let animationFrameId = null;
+    const DURATION = 8000; // 8 seconds per tab
+
+    function switchTab(index) {
+        // Reset previous tab
+        tabs[currentTab].classList.remove('active');
+        tabs[currentTab].setAttribute('aria-selected', 'false');
+        contentItems[currentTab].classList.remove('active');
+        progressBars[currentTab].style.width = '0%';
+
+        // Activate new tab
+        currentTab = index;
+        tabs[currentTab].classList.add('active');
+        tabs[currentTab].setAttribute('aria-selected', 'true');
+        contentItems[currentTab].classList.add('active');
+
+        // Reset timing
+        startTime = null;
+    }
+
+    function animate(timestamp) {
+        if (!startTime) startTime = timestamp;
+
+        if (!isPaused) {
+            const elapsed = timestamp - startTime;
+            // Calculate progress (0 to 1)
+            const progress = Math.min(elapsed / DURATION, 1);
+
+            // Update current tab's progress bar
+            // We use requestAnimationFrame so we need to set the width directly
+            progressBars[currentTab].style.width = `${progress * 100}%`;
+
+            if (progress >= 1) {
+                // Time's up, switch to next tab
+                const nextTab = (currentTab + 1) % tabs.length;
+                switchTab(nextTab);
+                // Reset start time for next tab
+                startTime = timestamp;
+            }
+        } else {
+            // If paused, we adjust startTime so when we unpause, 
+            // the elapsed time resumes from where it left off
+            // effectively "sliding" the start time forward
+            const currentProgress = parseFloat(progressBars[currentTab].style.width) / 100;
+            startTime = timestamp - (currentProgress * DURATION);
         }
-        
-        lastScrollTop = scrollTop;
+
+        animationFrameId = requestAnimationFrame(animate);
+    }
+
+    // Click handlers
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            switchTab(index);
+            // Reset progress bar of the clicked tab to 0 immediately
+            progressBars[currentTab].style.width = '0%';
+            startTime = null;
+        });
+
+        // Pause on hover
+        tab.addEventListener('mouseenter', () => isPaused = true);
+        tab.addEventListener('mouseleave', () => isPaused = false);
     });
+
+    // Also pause if hovering over content
+    const contentContainer = document.querySelector('.content-display');
+    if (contentContainer) {
+        contentContainer.addEventListener('mouseenter', () => isPaused = true);
+        contentContainer.addEventListener('mouseleave', () => isPaused = false);
+    }
+
+    // Start animation loop
+    animationFrameId = requestAnimationFrame(animate);
 }
-*/

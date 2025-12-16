@@ -289,6 +289,174 @@ body {
 }
 
 /* ========================================
+   How It Works Section (Auto-Progress Tabs)
+   ======================================== */
+.how-it-works {
+    padding: var(--spacing-3xl) 0;
+    background: var(--color-bg);
+}
+
+.section-header {
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-tagline {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+}
+
+.tabs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: start;
+}
+
+/* Tabs list */
+.tabs-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.tab-item {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-medium);
+    position: relative;
+    display: flex;
+    gap: var(--spacing-md);
+    opacity: 0.6;
+}
+
+.tab-item:hover {
+    opacity: 0.8;
+}
+
+.tab-item.active {
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 1;
+}
+
+.tab-number {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    padding-top: 0.2rem;
+}
+
+.tab-title {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.tab-description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+
+/* Progress bar inside tab */
+.progress-bar-container {
+    position: absolute;
+    bottom: 0;
+    left: var(--spacing-md);
+    right: var(--spacing-md);
+    height: 2px;
+    background: rgba(26, 90, 74, 0.1);
+    border-radius: 1px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.tab-item.active .progress-bar-container {
+    opacity: 1;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--color-accent);
+    width: 0%;
+    /* Animation is handled by JS requestAnimationFrame for smoothness,
+       but we can use transition for manual clicks */
+}
+
+/* Right Content Display */
+.content-display {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.content-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.content-item.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.content-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ========================================
    About Section
    ======================================== */
 .about-section {
