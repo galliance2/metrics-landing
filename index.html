@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,29 +8,71 @@
     <title>Creative Agency | Building Teams Since 2014</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <!-- Navigation -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">Collective</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main class="landing">
-        <section class="hero">
+        <!-- Hero Section -->
+        <section class="hero-banner">
             <div class="container">
-                <p class="hero-text">
-                    Since 2014, we've been unearthing what's next for our brand and agency partners. 
-                    From our Manchester roots to shaping NYC's creative landscape, we've placed hundreds 
-                    of creatives and built countless teams, both freelance and permanent. Always with 
+                <div class="hero-content">
+                    <span class="hero-tagline">Creative Talent Agency</span>
+                    <h1 class="hero-headline">
+                        We connect <em>exceptional</em> creative talent with <em>ambitious</em> brands
+                    </h1>
+                    <p class="hero-subtext">
+                        Building world-class creative teams across NYC, London, and beyond.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary">Start a Project</a>
+                        <a href="#work" class="btn btn-secondary">View Our Work</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll-indicator">
+                <span>Scroll to explore</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <p class="about-text">
+
+                    Since 2014, we've been unearthing what's next for our brand and agency partners.
+                    From our Manchester roots to shaping NYC's creative landscape, we've placed hundreds
+                    of creatives and built countless teams, both freelance and permanent. Always with
                     genuine care and competence at the core of our approach.
                 </p>
             </div>
         </section>
 
+        <!-- Metrics Section -->
         <section class="metrics">
             <div class="container">
                 <div class="metrics-grid">
                     <div class="metric-card">
                         <div class="metric-value" data-value="79" data-suffix="%">0%</div>
                         <p class="metric-description">
-                            Relationships, built to last. Most of our work is with agency and brand partners 
+                            Relationships, built to last. Most of our work is with agency and brand partners
                             who we've worked with for over two years.
                         </p>
                     </div>
@@ -37,7 +80,7 @@
                     <div class="metric-card">
                         <div class="metric-value" data-value="31" data-suffix="">0</div>
                         <p class="metric-description">
-                            Quality, at speed. On average, for permanent hires it takes just 31 days from 
+                            Quality, at speed. On average, for permanent hires it takes just 31 days from
                             briefing to signed contract. Compared to an industry average of 44.
                         </p>
                     </div>
@@ -45,7 +88,7 @@
                     <div class="metric-card">
                         <div class="metric-value" data-value="91" data-suffix="%">0%</div>
                         <p class="metric-description">
-                            Introductions that stick. 91% of our permanent hires are still thriving in-role 
+                            Introductions that stick. 91% of our permanent hires are still thriving in-role
                             after one year, outperforming the industry by 16%
                         </p>
                     </div>
@@ -53,7 +96,7 @@
                     <div class="metric-card">
                         <div class="metric-value" data-value="17000" data-suffix="+" data-is-large="true">0+</div>
                         <p class="metric-description">
-                            We've sourced and managed over 17,000 days of freelance this year in 14 different 
+                            We've sourced and managed over 17,000 days of freelance this year in 14 different
                             countries worldwide.
                         </p>
                     </div>
@@ -64,4 +107,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
